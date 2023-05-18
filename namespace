@@ -3,7 +3,7 @@ properties ([
 		
 		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
 		string(name: 'GIT_URL', defaultValue: 'https://github.com/skanav1986/tbs-1.git', description: '', trim: true),
-		string(name: 'REGISTRY-URL', defaultValue: '', trim: true), 
+		string(name: 'REGISTRY-URL', defaultValue: 'harborfortbs.test.com', trim: true), 
 		string(name: 'REGISTRY-USER-ID', defaultValue: '', trim: true),
 		string(name: 'REGISTRY-PASSWORD', defaultValue: '', trim: true),
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '', trim: true),
@@ -49,7 +49,7 @@ spec:
                     NAMESPACE="myapp-test"
                     GIT_URL="https://github.com/skanav1986/tbs-1.git"
                     BRANCH_NAME="main"
-		    REGISTRY-URL=""
+		    REGISTRY-URL="harborfortbs.test.com"
 		    REGISTRY-USER-ID=""
 		    REGISTRY-PASSWORD=""
                     
@@ -90,7 +90,7 @@ spec:
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start creating the registry credentials....." 
 			export REGISTRY_PASSWORD=${REGISTRY-PASSWORD} 
-                        kp secret create harbor-creds --registry ${REGISTRY-URL} --registry-user ${REGISTRY-USER-ID} -n ${NAMESPACE}
+                        kp secret create harbor-creds --registry harborfortbs.test.com --registry-user ${REGISTRY-USER-ID} -n ${NAMESPACE}
 
                     '''
 		    }
