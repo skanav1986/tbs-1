@@ -1,17 +1,72 @@
 pipeline {
+
     agent {
         kubernetes {
             defaultContainer 'jnlp'
             yaml """
 apiVersion: v1
-kind: Namespace
+kind: Pod
 metadata:
-  namespace: test-ns
   labels:
-    owner: kanav
+     app.kubernetes.io/name: jenkins-build
+     app.kubernetes.io/component: jenkins-build
+     app.kubernetes.io/version: "1"
+  namespace: myapp-test   
+spec:
+  containers:
+  - name: k8s
+    image: harborfortbs.test.com/jenkins/image
+    command:
+    - sleep
+    args:
+    - infinity
 """
-}
-          }
-         }
-    
+        }
+    }
+
+    stages {
+
+/*
+        
+        stage('Initialize the variables') {
+            steps{
+                script{
+                    
+                    NAMESPACE="myapp-test"
+                    GIT_URL="https://github.com/skanav1986/tbs-1.git"
+                    
+                    BRANCH_NAME="master"
+                    
+                }
+            }
+        }       
+*/
+        stage('Fetch from GitHub') {
+            steps {
+                dir("app"){
+                    git(
+                        poll: true,
+                        changelog: true,
+                        branch: "${BRANCH_NAME}",
+                        credentialsId: "github-creds",
+                        url: "${GIT_URL}"
+                    )
+                    sh 'git rev-parse HEAD > git-commit.txt'
+                }
+            }
+        }
+
+        stage('Create Namespace') {
+            steps {
+                container('k8s') {
+                    sh '''#!/bin/sh -e
+                        export GIT_COMMIT=$(cat app/git-commit.txt)
+                        echo "Start creating the namespace....." 
+                        kubectl create ns ${NAMESPACE}
+                    '''
+                }
+            }
+        }
+      }
+      }
         
