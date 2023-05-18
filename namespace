@@ -11,9 +11,9 @@ pipeline {
 
     agent {
         kubernetes {
-            label "build-pod"
+            
             cloud "kubernetes"
-            yaml '''
+            yaml """
 apiVersion: v1
 kind: Namespace
 metadata:
