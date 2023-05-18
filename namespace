@@ -2,7 +2,7 @@
 properties ([
 	parameters ([
 		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
-    string(name: 'BRANCH_NAME', defaultValue: 'master', description: '', trim: true),
+    string(name: 'BRANCH_NAME', defaultValue: 'main', description: '', trim: true),
 		
 	])
 ])
