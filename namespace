@@ -41,10 +41,9 @@ spec:
         stage('Initialize the variables') {
             steps{
                 script{
-                    
+                   
                     NAMESPACE="myapp-test"
                     GIT_URL="https://github.com/skanav1986/tbs-1.git"
-                    
                     BRANCH_NAME="main"
                     
                 }
@@ -57,7 +56,7 @@ spec:
                     git(
                         poll: true,
                         changelog: true,
-                        branch: "${BRANCH_NAME}",
+                        branch: "${env.BRANCH_NAME}",
                         credentialsId: "github-creds",
                         url: "${GIT_URL}"
                     )
@@ -72,7 +71,7 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start creating the namespace....." 
-                        kubectl create ns ${NAMESPACE}
+                        kubectl create ns ${env.NAMESPACE}
                     '''
                 }
             }
