@@ -56,7 +56,7 @@ spec:
                     git(
                         poll: true,
                         changelog: true,
-                        branch: "${env.BRANCH_NAME}",
+                        branch: "${BRANCH_NAME}",
                         credentialsId: "github-creds",
                         url: "${GIT_URL}"
                     )
@@ -71,7 +71,7 @@ spec:
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start creating the namespace....." 
-                        kubectl create ns ${env.NAMESPACE}
+                        kubectl create ns ${NAMESPACE}
                     '''
                 }
             }
