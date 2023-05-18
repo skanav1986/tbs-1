@@ -1,0 +1,27 @@
+
+properties ([
+	parameters ([
+		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
+    string(name: 'BRANCH_NAME', defaultValue: 'master', description: '', trim: true),
+		
+	])
+])
+
+pipeline {
+
+    agent {
+        kubernetes {
+            label "build-pod"
+            cloud "kubernetes"
+            yaml '''
+apiVersion: v1
+kind: Namespace
+metadata:
+  namespace: test-ns
+  labels:
+    owner: kanav
+    }
+    }
+    }
+    
+        
