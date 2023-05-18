@@ -1,13 +1,4 @@
-properties ([
-	parameters ([
-		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
-    string(name: 'BRANCH_NAME', defaultValue: 'main', description: '', trim: true),
-		
-	])
-])
-
 pipeline {
-
     agent {
         kubernetes {
             defaultContainer 'jnlp'
@@ -18,7 +9,8 @@ metadata:
   namespace: test-ns
   labels:
     owner: kanav
-                  }
+"""
+}
           }
          }
     
