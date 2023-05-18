@@ -10,8 +10,7 @@ pipeline {
 
     agent {
         kubernetes {
-            
-            cloud "kubernetes"
+            defaultContainer 'jnlp'
             yaml """
 apiVersion: v1
 kind: Namespace
