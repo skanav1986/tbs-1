@@ -2,9 +2,9 @@ properties ([
 	parameters ([
 		
 		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
-		string(name: 'GIT_URL', defaultValue: 'https://github.com/skanav1986/myapp-test.git', description: '', trim: true),
+		string(name: 'GIT_URL', defaultValue: 'https://github.com/skanav1986/tbs-1.git', description: '', trim: true),
         
-        string(name: 'BRANCH_NAME', defaultValue: 'master', description: '', trim: true),
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: '', trim: true),
 		
 	])
 ])
@@ -45,7 +45,7 @@ spec:
                     NAMESPACE="myapp-test"
                     GIT_URL="https://github.com/skanav1986/tbs-1.git"
                     
-                    BRANCH_NAME="master"
+                    BRANCH_NAME="main"
                     
                 }
             }
