@@ -93,6 +93,9 @@ spec:
                         kp secret create harbor-creds --registry ${REGISTRY-URL} --registry-user ${REGISTRY-USER-ID} -n ${NAMESPACE}
 
                     '''
+		    }
+		 }
+       }		 
       }
       }
         
