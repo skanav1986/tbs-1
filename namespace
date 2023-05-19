@@ -82,8 +82,8 @@ spec:
 	
 	environment {
 	    REGISTRY='harborfortbs.test.com'
-	    REGISTRY_USER=credentials('registryUser)
-	    REGISTRY_PASSWORD=credentials('registryPassword)'
+	    REGISTRY_USER="credentials('registryUser)"
+	    REGISTRY_PASSWORD="credentials('registryPassword)'"
 	    }
 	stage('Create registry credentials') {
             steps {
