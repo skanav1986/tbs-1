@@ -35,6 +35,11 @@ spec:
 """
         }
     }
+    environment {
+	    REGISTRY='harborfortbs.test.com'
+	    REGISTRY_USER="credentials('registryUser)"
+	    REGISTRY_PASSWORD="credentials('registryPassword)'"
+	    }
 
     stages {
 
@@ -80,11 +85,7 @@ spec:
             }
         }
 	
-	environment {
-	    REGISTRY='harborfortbs.test.com'
-	    REGISTRY_USER="credentials('registryUser)"
-	    REGISTRY_PASSWORD="credentials('registryPassword)'"
-	    }
+	
 	stage('Create registry credentials') {
             steps {
                 container('k8s') {
