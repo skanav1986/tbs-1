@@ -50,8 +50,8 @@ spec:
                     GIT_URL="https://github.com/skanav1986/tbs-1.git"
                     BRANCH_NAME="main"
 		    REGISTRY-URL="harborfortbs.test.com"
-		    REGISTRY-USER-ID=""
-		    REGISTRY-PASSWORD=""
+		    REGISTRY-USER-ID="admin"
+		    REGISTRY-PASSWORD="Harbor12345"
                     
                 }
             }
