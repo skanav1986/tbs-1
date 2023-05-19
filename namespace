@@ -4,8 +4,8 @@ properties ([
 		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
 		string(name: 'GIT_URL', defaultValue: 'https://github.com/skanav1986/tbs-1.git', description: '', trim: true),
 		string(name: 'REGISTRY-URL', defaultValue: 'harborfortbs.test.com', trim: true), 
-		string(name: 'REGISTRY-USER-ID', defaultValue: '', trim: true),
-		string(name: 'REGISTRY-PASSWORD', defaultValue: '', trim: true),
+		string(name: 'REGISTRY-USER-ID', defaultValue: '', trim: false),
+		string(name: 'REGISTRY-PASSWORD', defaultValue: '', trim: false),
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '', trim: true),
 	
 		
