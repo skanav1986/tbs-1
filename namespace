@@ -3,9 +3,9 @@ properties ([
 		
 		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
 		string(name: 'GIT_URL', defaultValue: 'https://github.com/skanav1986/tbs-1.git', description: '', trim: true),
-		string(name: 'REGISTRY-URL', defaultValue: 'harborfortbs.test.com', trim: true), 
-		string(name: 'REGISTRY-USER-ID', defaultValue: '', trim: false),
-		string(name: 'REGISTRY-PASSWORD', defaultValue: '', trim: false),
+		string(name: 'REGISTRY_URL', defaultValue: 'harborfortbs.test.com', trim: true), 
+		string(name: 'REGISTRY_USERID', defaultValue: '', trim: false),
+		string(name: 'REGISTRY_PASSWORD', defaultValue: '', trim: false),
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: '', trim: true),
 	
 		
@@ -49,9 +49,7 @@ spec:
                     NAMESPACE="myapp-test"
                     GIT_URL="https://github.com/skanav1986/tbs-1.git"
                     BRANCH_NAME="main"
-		    REGISTRY-URL="harborfortbs.test.com"
-		    REGISTRY-USER-ID="admin"
-		    REGISTRY-PASSWORD="Harbor12345"
+		    
                     
                 }
             }
@@ -83,14 +81,20 @@ spec:
                 }
             }
         }
+	
+	environment {
+	    REGISTRY = 'harborfortbs.test.com'
+	    REGISTRY_USER = credentials('registryUser)
+	    REGISTRY_PASSWORD = credentials('registryPassword)'
+	    }
 	stage('Create registry credentials') {
             steps {
                 container('k8s') {
                     sh '''#!/bin/sh -e
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start creating the registry credentials....." 
-			export REGISTRY_PASSWORD=${REGISTRY-PASSWORD} 
-                        kp secret create harbor-creds --registry harborfortbs.test.com --registry-user ${REGISTRY-USER-ID} -n ${NAMESPACE}
+			export REGISTRY_PASSWORD=${REGISTRY_PASSWORD} 
+                        kp secret create harbor-creds --registry ${REGISTRY} --registry-user ${REGISTRY-USER} -n ${NAMESPACE}
 
                     '''
 		    }
