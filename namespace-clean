@@ -2,7 +2,11 @@ properties ([
 	parameters ([
 		
 		string(name: 'NAMESPACE', defaultValue: '', description: 'Enter the name to create a namespace', trim: true),
-		string(name: 'BRANCH_NAME', defaultValue: '', description: 'Input the branch name', trim: true)
+		string(name: 'BRANCH_NAME', defaultValue: '', description: 'Input the branch name', trim: true), 
+		string(name: 'IMAGE_TAG', defaultValue: '', description: 'Input the tag value', trim: true),
+		string(name: 'APP_NAME', defaultValue: '', description: 'Input the app name to build', trim: true)
+		string(name: 'CLUSTER_BUILDER', defaultValue: '', description: 'Input the cluster builder name', trim: true)
+		string(name: 'GIT_URL', defaultValue: '', description: 'Input the GIT URL', trim: true)
 		
 	])
 ])
@@ -49,7 +53,7 @@ spec:
                         credentialsId: "github-creds",
                         url: "${GIT_URL}"
                     )
-                
+                sh 'git rev-parse HEAD > git-commit.txt'
             }
         }
 
@@ -74,10 +78,28 @@ spec:
                         echo "Start creating the registry credentials....." 
 			export REGISTRY_PASSWORD=${REGISTRY_PASSWORD} 
                         kp secret create harbor-creds --registry ${REGISTRY} --registry-user ${REGISTRY_USER} -n ${NAMESPACE}
+		
 
                     '''
 		    }
 		 }
+	
+	stage('TBS image build') {
+            steps {
+                container('k8s') {
+                    sh '''#!/bin/sh -e
+                      
+                        echo "Building TBS image....." 
+			export GIT_COMMIT=$(cat app/git-commit.txt)
+			kp image save ${APP_NAME} \
+			      --git "${GIT_URL}" \
+			      --cluster-builder "${CLUSTER_BUILDER}" \
+			      --tag "${IMAGE_TAG}" \
+			      --env BP_GRADLE_BUILD_ARGUMENT='--no-daemon build' \
+			      --git-revision "${GIT_COMMIT}" --sub-path ./ -n "$NAMESPACE" -w
+			      }
+			      }
+			      }
        }		 
       }
       }
