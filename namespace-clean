@@ -1,11 +1,7 @@
 properties ([
 	parameters ([
 		
-		string(name: 'NAMESPACE', defaultValue: 'myapp-test', description: '', trim: true),
-		string(name: 'GIT_URL', defaultValue: 'https://github.com/skanav1986/tbs-1.git', description: '', trim: true),
-		
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: '', trim: true),
-	
+		string(name: 'NAMESPACE', defaultValue: '', description: 'Enter the name to create a namespace', trim: true),
 		
 	])
 ])
@@ -58,7 +54,7 @@ spec:
 */
         stage('Fetch from GitHub') {
             steps {
-                dir("app"){
+                
                     git(
                         poll: true,
                         changelog: true,
@@ -67,7 +63,7 @@ spec:
                         url: "${GIT_URL}"
                     )
                     sh 'git rev-parse HEAD > git-commit.txt'
-                }
+                
             }
         }
 
