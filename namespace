@@ -91,7 +91,7 @@ spec:
                         export GIT_COMMIT=$(cat app/git-commit.txt)
                         echo "Start creating the registry credentials....." 
 			export REGISTRY_PASSWORD=${REGISTRY_PASSWORD} 
-                        kp secret create harbor-creds --registry ${REGISTRY} --registry-user ${REGISTRY-USER} -n ${NAMESPACE}
+                        kp secret create harbor-creds --registry ${REGISTRY} --registry-user ${REGISTRY_USER} -n ${NAMESPACE}
 
                     '''
 		    }
