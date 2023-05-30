@@ -1,7 +1,8 @@
 properties ([
 	parameters ([
 		
-		string(name: 'NAMESPACE', defaultValue: '', description: 'Enter the name to create a namespace', trim: true)
+		string(name: 'NAMESPACE', defaultValue: '', description: 'Enter the name to create a namespace', trim: true),
+		string(name: 'BRANCH_NAME', defaultValue: '', description: 'Input the branch name', trim: true)
 		
 	])
 ])
