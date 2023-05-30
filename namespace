@@ -36,9 +36,9 @@ spec:
         }
     }
     environment {
-	    REGISTRY='harborfortbs.test.com'
-	    REGISTRY_USER="credentials('registryUser)"
-	    REGISTRY_PASSWORD="credentials('registryPassword)'"
+	    REGISTRY = 'harborfortbs.test.com'
+	    REGISTRY_USER = credentials('registryUser')
+	    REGISTRY_PASSWORD = credentials('registryPassword')
 	    }
 
     stages {
@@ -47,13 +47,11 @@ spec:
         
         stage('Initialize the variables') {
             steps{
-                script{
+                environment{
                    
                     NAMESPACE="myapp-test"
                     GIT_URL="https://github.com/skanav1986/tbs-1.git"
                     BRANCH_NAME="main"
-		    
-                    
                 }
             }
         }       
