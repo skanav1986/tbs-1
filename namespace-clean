@@ -49,7 +49,6 @@ spec:
                         credentialsId: "github-creds",
                         url: "${GIT_URL}"
                     )
-                    sh 'git rev-parse HEAD > git-commit.txt'
                 
             }
         }
@@ -58,7 +57,7 @@ spec:
             steps {
                 container('k8s') {
                     sh '''#!/bin/sh -e
-                        export GIT_COMMIT=$(cat app/git-commit.txt)
+                       
                         echo "Start creating the namespace....." 
                         kubectl create ns ${NAMESPACE}
                     '''
@@ -71,7 +70,7 @@ spec:
             steps {
                 container('k8s') {
                     sh '''#!/bin/sh -e
-                        export GIT_COMMIT=$(cat app/git-commit.txt)
+                      
                         echo "Start creating the registry credentials....." 
 			export REGISTRY_PASSWORD=${REGISTRY_PASSWORD} 
                         kp secret create harbor-creds --registry ${REGISTRY} --registry-user ${REGISTRY_USER} -n ${NAMESPACE}
