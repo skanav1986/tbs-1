@@ -39,20 +39,6 @@ spec:
 	    }
 
     stages {
-
-/*
-        
-        stage('Initialize the variables') {
-            steps{
-                environment{
-                   
-                    NAMESPACE="myapp-test"
-                    GIT_URL="https://github.com/skanav1986/tbs-1.git"
-                    BRANCH_NAME="main"
-                }
-            }
-        }       
-*/
         stage('Fetch from GitHub') {
             steps {
                 
